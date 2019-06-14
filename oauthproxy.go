@@ -628,7 +628,7 @@ func (p *OAuthProxy) OAuthCallback(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	// set cookie, or deny
-	if p.Validator(session.Email) && p.provider.ValidateGroup(session.Email) {
+	//if p.Validator(session.Email) && p.provider.ValidateGroup(session.Email) {
 		logger.PrintAuthf(session.Email, req, logger.AuthSuccess, "Authenticated via OAuth2: %s", session)
 		err := p.SaveSession(rw, req, session)
 		if err != nil {
@@ -637,10 +637,10 @@ func (p *OAuthProxy) OAuthCallback(rw http.ResponseWriter, req *http.Request) {
 			return
 		}
 		http.Redirect(rw, req, redirect, 302)
-	} else {
-		logger.PrintAuthf(session.Email, req, logger.AuthSuccess, "Invalid authentication via OAuth2: unauthorized")
-		p.ErrorPage(rw, 403, "Permission Denied", "Invalid Account")
-	}
+	//} else {
+	//	logger.PrintAuthf(session.Email, req, logger.AuthSuccess, "Invalid authentication via OAuth2: unauthorized")
+	//	p.ErrorPage(rw, 403, "Permission Denied", "Invalid Account")
+	//}
 }
 
 // AuthenticateOnly checks whether the user is currently logged in
