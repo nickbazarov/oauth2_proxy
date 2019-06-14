@@ -90,41 +90,5 @@ func getEmailFromJSON(json *simplejson.Json) (string, error) {
 
 // GetEmailAddress returns the Account email address
 func (p *AzureProvider) GetEmailAddress(s *sessions.SessionState) (string, error) {
-	var email string
-	var err error
-
-	if s.AccessToken == "" {
-		return "", errors.New("missing access token")
-	}
-	req, err := http.NewRequest("GET", p.ProfileURL.String(), nil)
-	if err != nil {
-		return "", err
-	}
-	req.Header = getAzureHeader(s.AccessToken)
-
-	json, err := api.Request(req)
-
-	if err != nil {
-		return "", err
-	}
-
-	email, err = getEmailFromJSON(json)
-
-	if err == nil && email != "" {
-		return email, err
-	}
-
-	email, err = json.Get("userPrincipalName").String()
-
-	if err != nil {
-		logger.Printf("failed making request %s", err)
-		return "", err
-	}
-
-	if email == "" {
-		logger.Printf("failed to get email address")
-		return "", err
-	}
-
-	return email, err
+	return "", err
 }
