@@ -291,8 +291,10 @@ func (p *OAuthProxy) redeemCode(host, code string) (s *sessionsapi.SessionState,
 	}
 
 	if s.Email == "" {
-                logger.Printf("Trying to receive EmailAddress %s, err: %s", s.Email, err)
-		s.Email, err = p.provider.GetEmailAddress(s)
+                logger.Printf("Trying to receive EmailAddress")
+		//s.Email, err = p.provider.GetEmailAddress(s)
+		s.Email = "" 
+		err = nil
                 logger.Printf("Received EmailAddress %s, err: %s", s.Email, err)
 	}
 
